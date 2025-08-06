@@ -11,6 +11,21 @@ export interface Vehicle {
   category: 'Cat 01' | 'Cat 02' | 'Cat 03' | 'Cat 04' | 'Cat 05' | 'Cat 06';
   images: string[];
   availability?: string;
+  description?: string;
+  features?: {
+    seats: number;
+    doors: number;
+    bags: number;
+    transmission: 'automatique' | 'manuelle';
+    fuel: 'essence' | 'diesel' | 'électrique' | 'hybride';
+    consumption: string;
+    power: number;
+    acceleration: number;
+  };
+  dailyPrice?: number;
+  deposit?: number;
+  theme?: 'drivly' | 'orion';
+  tags?: string[];
 }
 
 export const vehicles: Vehicle[] = [
