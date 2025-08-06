@@ -1,16 +1,13 @@
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-type Plan = 'plus' | 'one';
-
 interface SubscriptionProps {
-  onPlanSelect: (plan: Plan) => void;
+  onPlanSelect: (plan: 'plus' | 'one') => void;
 }
 
 export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
-  const [selectedPlan, setSelectedPlan] = useState<Plan>('plus');
+  const [selectedPlan, setSelectedPlan] = useState<'plus' | 'one'>('plus');
 
-  const handlePlanChange = (plan: Plan) => {
+  const handlePlanChange = (plan: 'plus' | 'one') => {
     setSelectedPlan(plan);
     onPlanSelect(plan);
   };
@@ -107,7 +104,7 @@ export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
               {/* Service de livraison */}
               <div className="pt-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <svg className="w-6 h-6 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" fill="currentColor"/>
                   </svg>
                   <span className="font-medium">Service de livraison</span>
@@ -123,10 +120,10 @@ export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
             </div>
           </div>
 
-          {/* Bouton d{"'"}appel */}
+          {/* Bouton d'appel */}
           <div className="mt-8 pt-8 border-t border-white/10">
             <button className="flex items-center gap-2 text-blue-600 hover:text-blue-500 transition-colors">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" fill="currentColor"/>
               </svg>
               Appeler un conseiller

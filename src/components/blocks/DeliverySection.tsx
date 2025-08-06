@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 export const DeliverySection = () => {
   return (
     <section className="py-16 bg-black">
