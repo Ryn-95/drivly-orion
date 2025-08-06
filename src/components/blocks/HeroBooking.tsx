@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { DayPicker } from 'react-day-picker';
+import { DayPicker, DateRange } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { useBooking } from '../../store/useBooking';
 
 const locations = [
   { id: 'paris', name: 'Paris' },
@@ -16,21 +15,14 @@ const times = [
 ];
 
 export const HeroBooking = () => {
-  const [selectedRange, setSelectedRange] = useState<{
-    from: Date | undefined;
-    to: Date | undefined;
-  }>({
-    from: undefined,
-    to: undefined
-  });
-
+  const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
   const [pickupTime, setPickupTime] = useState('10:00');
   const [returnTime, setReturnTime] = useState('10:00');
   const [pickupLocation, setPickupLocation] = useState('');
   const [returnLocation, setReturnLocation] = useState('');
 
   const handleSearch = () => {
-    if (!selectedRange.from || !selectedRange.to || !pickupLocation || !returnLocation) {
+    if (!selectedRange?.from || !selectedRange?.to || !pickupLocation || !returnLocation) {
       return;
     }
 
@@ -90,7 +82,7 @@ export const HeroBooking = () => {
           <DayPicker
             mode="range"
             selected={selectedRange}
-            onSelect={(range) => setSelectedRange(range || { from: undefined, to: undefined })}
+            onSelect={setSelectedRange}
             className="border rounded-md p-2"
           />
         </div>
@@ -134,7 +126,7 @@ export const HeroBooking = () => {
       {/* Bouton de recherche */}
       <button
         onClick={handleSearch}
-        disabled={!selectedRange.from || !selectedRange.to || !pickupLocation || !returnLocation}
+        disabled={!selectedRange?.from || !selectedRange?.to || !pickupLocation || !returnLocation}
         className="mt-6 w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 disabled:opacity-50"
       >
         Rechercher un véhicule
