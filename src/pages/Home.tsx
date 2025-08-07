@@ -21,25 +21,4 @@ export const Home = () => {
     </main>
   );
 }; 
-      <Subscription onPlanSelect={handlePlanSelect} />
-      <Categories />
-      <DeliverySection />
-      <Services />
-      <VehicleCategories />
-    </main>
-  );
-};       <Subscription onPlanSelect={handlePlanSelect} />
-      <Categories />
-      <DeliverySection />
-      <Services />
-      <VehicleCategories />
-    </main>
-  );
-};       <Subscription onPlanSelect={handlePlanSelect} />
-      <Categories />
-      <DeliverySection />
-      <Services />
-      <VehicleCategories />
-    </main>
-  );
 
