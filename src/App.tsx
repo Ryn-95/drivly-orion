@@ -6,13 +6,11 @@ import { Fleet } from './pages/Fleet';
 export const App = () => {
   return (
     <Router>
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/flotte" element={<Fleet />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/flotte" element={<Fleet />} />
+      </Routes>
     </Router>
   );
 };
