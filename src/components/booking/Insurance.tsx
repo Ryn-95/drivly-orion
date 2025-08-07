@@ -1,5 +1,6 @@
 import { useBooking } from '../../store/useBooking';
 import { motion } from 'framer-motion';
+import { BookingStore, Insurance } from '../../types/booking';
 
 const insuranceOptions = [
   {

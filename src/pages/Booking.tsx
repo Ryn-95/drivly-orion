@@ -3,24 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Summary } from '../components/booking/Summary';
 import { Vehicle } from '../data/vehicles';
 
-interface DateRange {
-  from: Date;
-  to: Date;
-}
-
-interface Times {
-  pickup: string;
-  return: string;
-}
-
-interface Location {
-  id: string;
-  name: string;
-}
-
 export const Booking = () => {
   const navigate = useNavigate();
-  const { dateRange, times, pickupLocation, returnLocation, selectedVehicle } = useBooking();
+  const { dateRange, selectedVehicle } = useBooking();
 
   // Rediriger si les informations nécessaires ne sont pas présentes
   if (!dateRange?.from || !dateRange?.to || !selectedVehicle) {

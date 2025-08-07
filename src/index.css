@@ -91,3 +91,254 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+  
+  html {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: white;
+  }
+
+  body {
+    background-color: white;
+    color: #111111;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-[#0066FF] text-white hover:bg-[#0052CC];
+  }
+
+  .btn-outline {
+    @apply border border-[#e5e5e5] hover:bg-[#F4F4F4];
+  }
+
+  /* Styles spécifiques pour la flotte */
+  .vehicle-tag {
+    @apply px-2.5 py-1 text-[11px] bg-white/95 rounded-full shadow-sm;
+  }
+
+  .vehicle-dot {
+    @apply w-[6px] h-[6px] rounded-full transition-all duration-200;
+  }
+
+  .vehicle-dot-active {
+    @apply bg-black/90;
+  }
+
+  .vehicle-dot-inactive {
+    @apply bg-black/40 hover:bg-black/60;
+  }
+  
+  /* Styles pour les filtres */
+  .filter-button {
+    @apply px-4 py-2 text-[13px] font-medium text-[#111111] hover:text-black transition-colors;
+  }
+
+  .filter-dropdown {
+    @apply absolute top-[calc(100%+4px)] left-0 py-1 w-48 bg-white rounded-[12px] shadow-lg border border-[#eaeaea] overflow-hidden;
+  }
+
+  .filter-option {
+    @apply block w-full px-4 py-2 text-[13px] text-left text-[#111111] hover:bg-[#F4F4F4] transition-colors;
+  }
+  
+  /* Styles pour la navigation des catégories */
+  .category-button {
+    @apply h-[40px] px-5 text-[13px] font-medium transition-all rounded-[9999px];
+  }
+
+  .category-button-active {
+    @apply bg-[#F4F4F4] text-[#111111];
+  }
+
+  .category-button-inactive {
+    @apply text-[#666666] hover:text-[#111111];
+  }
+}
+
+/* Masquer la scrollbar tout en gardant la fonctionnalité */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+  
+  html {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: white;
+  }
+
+  body {
+    background-color: white;
+    color: #111111;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-[#0066FF] text-white hover:bg-[#0052CC];
+  }
+
+  .btn-outline {
+    @apply border border-[#e5e5e5] hover:bg-[#F4F4F4];
+  }
+
+  /* Styles spécifiques pour la flotte */
+  .vehicle-tag {
+    @apply px-2.5 py-1 text-[11px] bg-white/95 rounded-full shadow-sm;
+  }
+
+  .vehicle-dot {
+    @apply w-[6px] h-[6px] rounded-full transition-all duration-200;
+  }
+
+  .vehicle-dot-active {
+    @apply bg-black/90;
+  }
+
+  .vehicle-dot-inactive {
+    @apply bg-black/40 hover:bg-black/60;
+  }
+  
+  /* Styles pour les filtres */
+  .filter-button {
+    @apply px-4 py-2 text-[13px] font-medium text-[#111111] hover:text-black transition-colors;
+  }
+
+  .filter-dropdown {
+    @apply absolute top-[calc(100%+4px)] left-0 py-1 w-48 bg-white rounded-[12px] shadow-lg border border-[#eaeaea] overflow-hidden;
+  }
+
+  .filter-option {
+    @apply block w-full px-4 py-2 text-[13px] text-left text-[#111111] hover:bg-[#F4F4F4] transition-colors;
+  }
+  
+  /* Styles pour la navigation des catégories */
+  .category-button {
+    @apply h-[40px] px-5 text-[13px] font-medium transition-all rounded-[9999px];
+  }
+
+  .category-button-active {
+    @apply bg-[#F4F4F4] text-[#111111];
+  }
+
+  .category-button-inactive {
+    @apply text-[#666666] hover:text-[#111111];
+  }
+}
+
+/* Masquer la scrollbar tout en gardant la fonctionnalité */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+  
+  html {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: white;
+  }
+
+  body {
+    background-color: white;
+    color: #111111;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium tracking-wide transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-[#0066FF] text-white hover:bg-[#0052CC];
+  }
+
+  .btn-outline {
+    @apply border border-[#e5e5e5] hover:bg-[#F4F4F4];
+  }
+
+  /* Styles spécifiques pour la flotte */
+  .vehicle-tag {
+    @apply px-2.5 py-1 text-[11px] bg-white/95 rounded-full shadow-sm;
+  }
+
+  .vehicle-dot {
+    @apply w-[6px] h-[6px] rounded-full transition-all duration-200;
+  }
+
+  .vehicle-dot-active {
+    @apply bg-black/90;
+  }
+
+  .vehicle-dot-inactive {
+    @apply bg-black/40 hover:bg-black/60;
+  }
+  
+  /* Styles pour les filtres */
+  .filter-button {
+    @apply px-4 py-2 text-[13px] font-medium text-[#111111] hover:text-black transition-colors;
+  }
+
+  .filter-dropdown {
+    @apply absolute top-[calc(100%+4px)] left-0 py-1 w-48 bg-white rounded-[12px] shadow-lg border border-[#eaeaea] overflow-hidden;
+  }
+
+  .filter-option {
+    @apply block w-full px-4 py-2 text-[13px] text-left text-[#111111] hover:bg-[#F4F4F4] transition-colors;
+  }
+  
+  /* Styles pour la navigation des catégories */
+  .category-button {
+    @apply h-[40px] px-5 text-[13px] font-medium transition-all rounded-[9999px];
+  }
+
+  .category-button-active {
+    @apply bg-[#F4F4F4] text-[#111111];
+  }
+
+  .category-button-inactive {
+    @apply text-[#666666] hover:text-[#111111];
+  }
+}
+
+/* Masquer la scrollbar tout en gardant la fonctionnalité */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
