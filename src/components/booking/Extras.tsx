@@ -1,14 +1,12 @@
 import { useBooking } from '../../store/useBooking';
 import { motion } from 'framer-motion';
-import { Extra } from '../../types/booking';
 
-const extras: Extra[] = [
+const extras = [
   {
     id: 'gps',
     name: 'GPS',
     description: 'Navigation GPS intégrée',
     price: 5,
-    selected: false,
     icon: (
       <svg
         className="w-6 h-6"
@@ -36,7 +34,6 @@ const extras: Extra[] = [
     name: 'Siège enfant',
     description: 'Siège auto homologué',
     price: 10,
-    selected: false,
     icon: (
       <svg
         className="w-6 h-6"
@@ -58,7 +55,6 @@ const extras: Extra[] = [
     name: 'WiFi 4G',
     description: 'Connexion internet illimitée',
     price: 8,
-    selected: false,
     icon: (
       <svg
         className="w-6 h-6"

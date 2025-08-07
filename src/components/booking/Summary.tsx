@@ -1,95 +1,147 @@
 import { useBooking } from '../../store/useBooking';
-import { Vehicle } from '../../data/vehicles';
-import { differenceInDays, format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+import { motion } from 'framer-motion';
+import { differenceInDays } from 'date-fns';
 
-interface SummaryProps {
-  selectedVehicle: Vehicle;
-}
+export const Summary = () => {
+  const {
+    selectedVehicle,
+    dateRange,
+    pickupLocation,
+    returnLocation,
+    times,
+    extras,
+    insurance,
+  } = useBooking();
 
-export const Summary = ({ selectedVehicle }: SummaryProps) => {
-  const { dateRange, times, pickupLocation, returnLocation } = useBooking();
+  if (!selectedVehicle || !dateRange.startDate || !dateRange.endDate) {
+    return null;
+  }
 
-  // Calcul du nombre de jours
-  const numberOfDays = dateRange?.from && dateRange?.to
-    ? differenceInDays(dateRange.to, dateRange.from) + 1
-    : 0;
-
-  // Calcul du prix total
-  const dailyPrice = selectedVehicle.dailyPrice || 0;
-  const totalPrice = numberOfDays * dailyPrice;
+  const numberOfDays = differenceInDays(dateRange.endDate, dateRange.startDate) + 1;
+  const vehicleTotal = selectedVehicle.dailyPrice * numberOfDays;
+  const extrasTotal = extras
+    .filter((extra) => extra.selected)
+    .reduce((acc, extra) => acc + extra.price * numberOfDays, 0);
+  const insuranceTotal = insurance ? insurance.price * numberOfDays : 0;
+  const total = vehicleTotal + extrasTotal + insuranceTotal;
 
   return (
-    <div className="bg-white rounded-lg p-6 shadow-lg">
-      <h2 className="text-2xl font-medium mb-6">Résumé de votre réservation</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-8"
+    >
+      <div>
+        <h2 className="text-2xl font-medium mb-2">Récapitulatif</h2>
+        <p className="text-drivly-muted">
+          Vérifiez les détails de votre réservation.
+        </p>
+      </div>
 
-      {/* Véhicule */}
-      <div className="mb-6">
-        <h3 className="text-lg font-medium mb-2">Véhicule sélectionné</h3>
-        <div className="flex items-center gap-4">
-          <img
-            src={selectedVehicle.images[0]}
-            alt={selectedVehicle.model}
-            className="w-24 h-24 object-cover rounded-lg"
-          />
-          <div>
-            <p className="font-medium">{selectedVehicle.brand} {selectedVehicle.model}</p>
-            {selectedVehicle.features && (
-              <div className="text-sm text-gray-600 mt-1">
-                <p>{selectedVehicle.features.seats} sièges • {selectedVehicle.features.transmission}</p>
-                <p>{selectedVehicle.features.fuel} • {selectedVehicle.features.consumption}</p>
+      <div className="card space-y-6">
+        {/* Véhicule */}
+        <div>
+          <h3 className="text-lg font-medium mb-4">Véhicule</h3>
+          <div className="flex items-start space-x-4">
+            <div className="aspect-w-16 aspect-h-9 w-32 rounded-16 overflow-hidden">
+              <img
+                src={selectedVehicle.images[0]}
+                alt={`${selectedVehicle.brand} ${selectedVehicle.model}`}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div>
+              <div className="font-medium">
+                {selectedVehicle.brand} {selectedVehicle.model}
               </div>
-            )}
+              <div className="text-sm text-drivly-muted">
+                {selectedVehicle.features.transmission} •{' '}
+                {selectedVehicle.features.fuel}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Dates et lieux */}
+        <div>
+          <h3 className="text-lg font-medium mb-4">Dates et lieux</h3>
+          <div className="space-y-4">
+            <div>
+              <div className="text-sm text-drivly-muted">Prise en charge</div>
+              <div>
+                {dateRange.startDate.toLocaleDateString()} à {times.pickupTime}
+              </div>
+              <div className="text-sm">{pickupLocation?.name}</div>
+            </div>
+            <div>
+              <div className="text-sm text-drivly-muted">Retour</div>
+              <div>
+                {dateRange.endDate.toLocaleDateString()} à {times.returnTime}
+              </div>
+              <div className="text-sm">
+                {returnLocation?.name || pickupLocation?.name}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Options */}
+        {extras.some((extra) => extra.selected) && (
+          <div>
+            <h3 className="text-lg font-medium mb-4">Options</h3>
+            <ul className="space-y-2">
+              {extras
+                .filter((extra) => extra.selected)
+                .map((extra) => (
+                  <li key={extra.id} className="flex justify-between">
+                    <span>{extra.name}</span>
+                    <span>
+                      {extra.price}€ × {numberOfDays}j ={' '}
+                      {extra.price * numberOfDays}€
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Assurance */}
+        {insurance && (
+          <div>
+            <h3 className="text-lg font-medium mb-4">Protection</h3>
+            <div className="flex justify-between">
+              <span>Protection {insurance.type}</span>
+              <span>
+                {insurance.price}€ × {numberOfDays}j = {insuranceTotal}€
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Total */}
+        <div className="border-t border-drivly-line pt-6">
+          <div className="flex justify-between items-end">
+            <div>
+              <div className="text-sm text-drivly-muted">Total</div>
+              <div className="text-2xl font-medium">{total}€</div>
+            </div>
+            <div className="text-sm text-drivly-muted">
+              {numberOfDays} jour{numberOfDays > 1 ? 's' : ''}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Détails de la réservation */}
-      <div className="space-y-4">
-        {/* Prise en charge */}
-        <div>
-          <h3 className="font-medium mb-1">Prise en charge</h3>
-          {dateRange?.from && times?.pickup && (
-            <p className="text-gray-600">
-              {format(dateRange.from, 'EEEE d MMMM yyyy', { locale: fr })} à {times.pickup}
-            </p>
-          )}
-          {pickupLocation && (
-            <p className="text-gray-600">{pickupLocation.name}</p>
-          )}
-        </div>
-
-        {/* Retour */}
-        <div>
-          <h3 className="font-medium mb-1">Retour</h3>
-          {dateRange?.to && times?.return && (
-            <p className="text-gray-600">
-              {format(dateRange.to, 'EEEE d MMMM yyyy', { locale: fr })} à {times.return}
-            </p>
-          )}
-          {returnLocation && pickupLocation && (
-            <p className="text-gray-600">
-              {returnLocation.name === pickupLocation.name ? 'Même agence' : returnLocation.name}
-            </p>
-          )}
-        </div>
-
-        {/* Prix */}
-        <div className="pt-4 border-t">
-          <div className="flex justify-between mb-2">
-            <span>Prix par jour</span>
-            <span>{dailyPrice}€</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span>Nombre de jours</span>
-            <span>{numberOfDays}</span>
-          </div>
-          <div className="flex justify-between font-medium text-lg pt-2 border-t">
-            <span>Total</span>
-            <span>{totalPrice}€</span>
-          </div>
-        </div>
+      {/* Informations importantes */}
+      <div className="bg-drivly-surface rounded-24 p-6">
+        <h3 className="text-lg font-medium mb-4">Informations importantes</h3>
+        <ul className="space-y-2 text-sm text-drivly-muted">
+          <li>• Caution : {selectedVehicle.deposit}€</li>
+          <li>• Kilométrage inclus : 150km/jour</li>
+          <li>• Carburant : plein à plein</li>
+          <li>• Documents requis : permis, pièce d'identité, justificatif de domicile</li>
+        </ul>
       </div>
-    </div>
+    </motion.div>
   );
 }; 

@@ -116,6 +116,3 @@ export const FleetGrid = ({ selectedCategory = 'All' }: FleetGridProps) => {
     </div>
   );
 }; 
- 
- 
- 

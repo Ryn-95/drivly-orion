@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { FleetFilters } from '../components/blocks/FleetFilters';
 import { FleetGrid } from '../components/blocks/FleetGrid';
+import { motion } from 'framer-motion';
 
 export const Fleet = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   return (
-    <div className="min-h-screen bg-white pt-[72px]">
+    <div className="min-h-screen bg-white">
       {/* Hero section */}
       <div className="w-full bg-[#F4F4F4]">
         <div className="max-w-[1600px] mx-auto px-8 py-12">
@@ -21,9 +22,11 @@ export const Fleet = () => {
       </div>
 
       {/* Contenu principal */}
-      <div className="max-w-[1600px] mx-auto px-8">
-        <FleetFilters onCategoryChange={setSelectedCategory} />
-        <FleetGrid selectedCategory={selectedCategory} />
+      <div className="w-full bg-white">
+        <div className="max-w-[1600px] mx-auto px-8">
+          <FleetFilters onCategoryChange={setSelectedCategory} />
+          <FleetGrid selectedCategory={selectedCategory} />
+        </div>
       </div>
 
       {/* Section d'aide */}

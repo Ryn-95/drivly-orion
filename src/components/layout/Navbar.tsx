@@ -1,11 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
-const navItems = [
-  { name: 'Flotte', path: '/flotte' },
-  { name: 'Services', path: '/services' },
-  { name: 'Contact', path: '/contact' }
-];
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +34,11 @@ export const Navbar = () => {
 
           {/* Navigation principale */}
           <div className="hidden lg:flex items-center">
-            {navItems.map((item) => (
+            {[
+              { name: 'Flotte', path: '/flotte' },
+              { name: 'Services', path: '/services' },
+              { name: 'Contact', path: '/contact' }
+            ].map((item, index) => (
               <Link
                 key={item.name}
                 to={item.path}
@@ -79,6 +77,3 @@ export const Navbar = () => {
     </nav>
   );
 }; 
- 
- 
- 

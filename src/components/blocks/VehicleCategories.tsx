@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const categories = [
@@ -84,10 +85,7 @@ export const VehicleCategories = () => {
           {categories
             .find((cat) => cat.id === selectedCategory)
             ?.vehicles.map((vehicle) => (
-              <div
-                key={vehicle.id}
-                className="bg-gray-50 rounded-lg p-8"
-              >
+              <div key={vehicle.id} className="bg-gray-50 rounded-lg p-8">
                 <img
                   src={vehicle.image}
                   alt={vehicle.name}
@@ -103,6 +101,3 @@ export const VehicleCategories = () => {
     </section>
   );
 }; 
- 
- 
- 

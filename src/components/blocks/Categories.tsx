@@ -124,6 +124,3 @@ export const Categories = () => {
     </section>
   );
 }; 
- 
- 
- 
