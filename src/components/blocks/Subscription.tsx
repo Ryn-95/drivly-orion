@@ -32,7 +32,7 @@ export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
                   : 'text-white/60 hover:text-white'
               }`}
             >
-              Turismo Plus
+              Drivly Plus
             </button>
             <button
               onClick={() => handlePlanChange('one')}
@@ -42,7 +42,7 @@ export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
                   : 'text-white/60 hover:text-white'
               }`}
             >
-              Turismo One
+              Orion One
             </button>
           </div>
         </div>
@@ -52,7 +52,7 @@ export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
           <div className="flex justify-between items-start mb-8">
             <div>
               <h2 className="text-3xl font-title mb-2">
-                {selectedPlan === 'plus' ? "Turismo Plus" : "Turismo One"}
+                {selectedPlan === 'plus' ? "Drivly Plus" : "Orion One"}
               </h2>
               <p className="text-white/60">
                 {selectedPlan === 'plus' 
