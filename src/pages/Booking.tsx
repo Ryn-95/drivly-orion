@@ -1,7 +1,6 @@
 import { useBooking } from '../store/useBooking';
 import { useNavigate } from 'react-router-dom';
 import { Summary } from '../components/booking/Summary';
-import { Vehicle } from '../data/vehicles';
 
 export const Booking = () => {
   const navigate = useNavigate();

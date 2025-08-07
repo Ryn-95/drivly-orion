@@ -1,13 +1,7 @@
-// Commented out unused imports for now
-// import { Location } from './Location';
-// import { Times } from './Times';
-// import { DateRange } from './DateRange';
-
 import { useBooking } from '../../store/useBooking';
 import { Vehicle } from '../../data/vehicles';
 import { differenceInDays, format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { Location, Times, DateRange } from '../../types/booking';
 
 interface SummaryProps {
   selectedVehicle: Vehicle;

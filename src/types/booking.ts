@@ -1,3 +1,5 @@
+import { Vehicle } from '../data/vehicles';
+
 export interface Extra {
   id: string;
   name: string;
@@ -26,6 +28,9 @@ export interface DateRange {
 }
 
 export interface BookingStore {
+  // Vehicle
+  selectedVehicle: Vehicle | null;
+
   // Extras
   extras: Extra[];
   toggleExtra: (extraId: string) => void;
@@ -43,4 +48,4 @@ export interface BookingStore {
   returnLocation: Location | null;
 }
 
-export type EventHandler = (e: React.ChangeEvent<HTMLInputElement>) => void; 
+export type EventHandler = React.ChangeEventHandler<HTMLInputElement>; 

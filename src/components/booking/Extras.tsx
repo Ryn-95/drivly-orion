@@ -1,6 +1,5 @@
 import { useBooking } from '../../store/useBooking';
 import { motion } from 'framer-motion';
-import { BookingStore, Extra, EventHandler } from '../../types/booking';
 
 const extras = [
   {
@@ -76,10 +75,6 @@ const extras = [
 
 export const Extras = () => {
   const { extras: selectedExtras, toggleExtra } = useBooking();
-
-  const handleChange: EventHandler = (e) => {
-    // ... existing code ...
-  };
 
   return (
     <div className="space-y-8">
