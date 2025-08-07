@@ -61,7 +61,7 @@
   }
 
   .filter-dropdown {
-    @apply absolute top-[calc(100%_+_4px)] left-0 py-1 w-48 bg-white rounded-[12px] shadow-lg border border-[#eaeaea] overflow-hidden;
+    @apply absolute top-[44px] left-0 py-1 w-48 bg-white rounded-[12px] shadow-lg border border-[#eaeaea] overflow-hidden;
   }
 
   .filter-option {
