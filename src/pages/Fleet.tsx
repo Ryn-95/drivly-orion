@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FleetFilters } from '../components/blocks/FleetFilters';
 import { FleetGrid } from '../components/blocks/FleetGrid';
+import { motion } from 'framer-motion';
 
 export const Fleet = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
