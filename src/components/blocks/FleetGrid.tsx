@@ -14,71 +14,68 @@ const VehicleCard = ({ vehicle }: VehicleCardProps) => {
   return (
     <Link 
       to={`/vehicule/${vehicle.slug}`}
-      className="block group bg-white"
+      className="block group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Container image */}
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] mb-4 bg-[#F4F4F4]">
-        <motion.img
-          src={vehicle.images[currentImageIndex]}
-          alt={`${vehicle.brand} ${vehicle.model}`}
-          className="w-full h-full object-cover"
-          animate={{ scale: isHovered ? 1.02 : 1 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-        />
-        
-        {/* Badges et disponibilité */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-          {vehicle.availability && (
-            <span className="px-2.5 py-1 text-[11px] leading-none font-medium bg-black/90 text-white rounded-full">
-              {vehicle.availability}
-            </span>
-          )}
-          <div className="flex flex-wrap gap-1.5">
+      <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+        {/* Image comme Turismo */}
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <motion.img
+            src={vehicle.images[currentImageIndex]}
+            alt={`${vehicle.brand} ${vehicle.model}`}
+            className="w-full h-full object-cover"
+            animate={{ scale: isHovered ? 1.05 : 1 }}
+            transition={{ duration: 0.3 }}
+          />
+          
+          {/* Badges comme Turismo */}
+          <div className="absolute top-3 left-3 flex flex-col gap-2">
             {vehicle.badges.map((badge, index) => (
               <span
                 key={index}
-                className="px-2.5 py-1 text-[11px] leading-none font-medium bg-white/95 text-[#111111] rounded-full"
+                className="px-2 py-1 text-xs font-medium bg-black text-white rounded-md"
               >
                 {badge}
               </span>
             ))}
           </div>
+
+          {/* Navigation dots comme Turismo */}
+          {vehicle.images.length > 1 && (
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+              {vehicle.images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentImageIndex(index);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentImageIndex 
+                      ? 'bg-white' 
+                      : 'bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Points de navigation */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-[6px]">
-          {vehicle.images.map((_, index) => (
-            <button
-              key={index}
-              onClick={(e) => {
-                e.preventDefault();
-                setCurrentImageIndex(index);
-              }}
-              className={`w-[6px] h-[6px] rounded-full transition-all duration-200 ${
-                index === currentImageIndex 
-                  ? 'bg-black/90' 
-                  : 'bg-black/40 hover:bg-black/60'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Informations véhicule */}
-      <div className="px-0.5">
-        <h3 className="text-[16px] font-medium mb-2 text-[#111111]">
-          {vehicle.brand} - {vehicle.model}
-        </h3>
-        <div className="text-[14px] text-[#666666] space-y-1">
-          <div>Puissance: {vehicle.power}</div>
-          <div>CO2: {vehicle.co2}</div>
-        </div>
-        <div className="mt-3 flex items-baseline">
-          <span className="text-[14px] text-[#666666]">àpd</span>
-          <span className="text-[15px] font-medium mx-1 text-[#111111]">{vehicle.price}€</span>
-          <span className="text-[14px] text-[#666666]">(htva)/{vehicle.pricePeriod}</span>
+        {/* Informations comme Turismo */}
+        <div className="p-4 space-y-2">
+          <h3 className="font-semibold text-gray-900 text-lg">
+            {vehicle.brand} - {vehicle.model}
+          </h3>
+          
+          <div className="text-sm text-gray-600 space-y-1">
+            <div>Puissance: {vehicle.power}</div>
+            <div>CO2: {vehicle.co2}</div>
+          </div>
+          
+          <div className="text-lg font-bold text-gray-900">
+            àpd {vehicle.price}€ (htva)/mois
+          </div>
         </div>
       </div>
     </Link>
@@ -90,29 +87,49 @@ interface FleetGridProps {
 }
 
 export const FleetGrid = ({ selectedCategory = 'All' }: FleetGridProps) => {
-  const filteredVehicles = selectedCategory === 'All' 
-    ? vehicles 
-    : vehicles.filter(v => v.category === selectedCategory);
+  const [sortBy, setSortBy] = useState<string>('default');
+  const [priceRange, setPriceRange] = useState<string>('all');
+  const [selectedBrand, setSelectedBrand] = useState<string>('all');
+
+  // Filtrage des véhicules - logique simplifiée
+  const filteredVehicles = vehicles;
 
   return (
-    <div className="py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
-        <AnimatePresence>
-          {filteredVehicles.map((vehicle) => (
-            <motion.div
-              key={vehicle.id}
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white"
-            >
-              <VehicleCard vehicle={vehicle} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
+    <div>
+      <AnimatePresence>
+        {filteredVehicles.length > 0 ? (
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            {filteredVehicles.map((vehicle, index) => (
+              <motion.div
+                key={vehicle.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.4, 
+                  delay: index * 0.05
+                }}
+              >
+                <VehicleCard vehicle={vehicle} />
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            className="text-center py-16"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h3 className="text-xl font-medium text-gray-900 mb-2">Aucun véhicule trouvé</h3>
+            <p className="text-gray-500">Modifiez vos critères de recherche</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }; 

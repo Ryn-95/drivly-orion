@@ -13,19 +13,23 @@ const CATEGORIES = [
 const FILTERS = [
   { 
     id: 'sort',
-    label: 'Trier par'
-  },
-  { 
-    id: 'type',
-    label: 'Type de voiture'
-  },
-  { 
-    id: 'engine',
-    label: 'Motorisation'
+    label: 'Trier par',
+    options: ['Prix croissant', 'Prix décroissant', 'Puissance', 'Disponibilité']
   },
   { 
     id: 'brand',
-    label: 'Marques'
+    label: 'Marques',
+    options: ['Toutes les marques', 'Porsche', 'Land Rover', 'Mercedes', 'BMW', 'Audi']
+  },
+  { 
+    id: 'price',
+    label: 'Budget mensuel',
+    options: ['Tous les prix', '< 500€', '500€ - 1000€', '> 1000€']
+  },
+  { 
+    id: 'availability',
+    label: 'Disponibilité',
+    options: ['Toutes', 'Immédiate', 'Sur commande']
   }
 ];
 
@@ -35,55 +39,58 @@ interface FleetFiltersProps {
 
 export const FleetFilters = ({ onCategoryChange }: FleetFiltersProps) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
     onCategoryChange(categoryId === 'all' ? 'All' : categoryId.replace('cat-', 'Cat '));
   };
 
+  const handleFilterClick = (filterId: string) => {
+    setActiveFilter(activeFilter === filterId ? null : filterId);
+  };
+
+  const handleOptionSelect = (filterId: string, option: string) => {
+    setSelectedOptions(prev => ({ ...prev, [filterId]: option }));
+    setActiveFilter(null);
+  };
+
   return (
-    <div className="w-full bg-white sticky top-[72px] z-30 pb-5 border-b border-[#eaeaea]">
-      {/* Barre de filtres */}
-      <div className="max-w-[1600px] mx-auto">
-        <div className="flex items-center justify-center">
-          <div className="flex items-center h-[42px] gap-4 px-4 rounded-[9999px] bg-[#F4F4F4]">
-            {FILTERS.map((filter) => (
-              <button
-                key={filter.id}
-                className="flex items-center gap-1.5 px-4 h-[42px] text-[13px] font-medium text-[#111111] hover:text-black transition-colors"
-              >
-                {filter.label}
-                <svg
-                  className="w-3.5 h-3.5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-            ))}
-          </div>
+    <div className="w-full space-y-6">
+      {/* Filtres principaux comme Turismo */}
+      <div className="bg-white rounded-2xl p-4 shadow-sm">
+        <div className="flex items-center gap-4">
+          <button className="px-4 py-2 bg-gray-100 rounded-xl text-gray-700 text-sm font-medium">
+            Trier par
+          </button>
+          <button className="px-4 py-2 bg-gray-100 rounded-xl text-gray-700 text-sm font-medium">
+            Type de voiture
+          </button>
+          <button className="px-4 py-2 bg-gray-100 rounded-xl text-gray-700 text-sm font-medium">
+            Motorisation
+          </button>
+          <button className="px-4 py-2 bg-gray-100 rounded-xl text-gray-700 text-sm font-medium">
+            Marques
+          </button>
         </div>
       </div>
 
-      {/* Catégories */}
-      <div className="max-w-[1600px] mx-auto mt-5">
-        <div className="flex items-center gap-3 px-1">
-          {CATEGORIES.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => handleCategoryChange(category.id)}
-              className={`h-[40px] px-5 text-[13px] font-medium transition-all rounded-[9999px] ${
-                selectedCategory === category.id
-                  ? 'bg-[#F4F4F4] text-[#111111]'
-                  : 'text-[#666666] hover:text-[#111111]'
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
+      {/* Catégories comme Turismo */}
+      <div className="flex items-center gap-3">
+        {CATEGORIES.map((category) => (
+          <button
+            key={category.id}
+            onClick={() => handleCategoryChange(category.id)}
+            className={`px-6 py-3 text-sm font-medium rounded-full border transition-all ${
+              selectedCategory === category.id
+                ? 'bg-blue-500 text-white border-blue-500'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
+            }`}
+          >
+            {category.label}
+          </button>
+        ))}
       </div>
     </div>
   );

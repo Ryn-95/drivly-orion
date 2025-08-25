@@ -21,22 +21,24 @@ export const Navbar = () => {
           : 'bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-8 py-6">
+      <div className="container mx-auto px-8 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link 
             to="/" 
-            className="flex items-baseline space-x-3"
+            className="flex items-center -my-4"
           >
-            <span className="text-xl font-title text-white">Drivly</span>
-            <span className="text-[10px] font-light tracking-widest text-white/60">ORION</span>
+            <img 
+              src="/image/orion.png" 
+              alt="Orion" 
+              className="h-28 w-auto"
+            />
           </Link>
 
           {/* Navigation principale */}
           <div className="hidden lg:flex items-center">
             {[
               { name: 'Flotte', path: '/flotte' },
-              { name: 'Services', path: '/services' },
               { name: 'Contact', path: '/contact' }
             ].map((item) => (
               <Link

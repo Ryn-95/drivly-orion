@@ -11,6 +11,17 @@ export interface Vehicle {
   category: 'Cat 01' | 'Cat 02' | 'Cat 03' | 'Cat 04' | 'Cat 05' | 'Cat 06';
   images: string[];
   availability?: string;
+  description?: string;
+  features?: string[];
+  specifications?: {
+    acceleration?: string;
+    topSpeed?: string;
+    transmission?: string;
+    seats?: number;
+    consumption?: string;
+  };
+  included?: string[];
+  conditions?: string[];
 }
 
 export const vehicles: Vehicle[] = [
@@ -23,14 +34,45 @@ export const vehicles: Vehicle[] = [
     co2: '48g',
     price: 791,
     pricePeriod: 'mois',
-    badges: [],
+    badges: ['Hybride Rechargeable', 'Premium', 'SUV'],
     category: 'Cat 02',
     images: [
       'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=2070',
       'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=2070',
       'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=2070'
     ],
-    availability: 'Plus disponible jusqu\'à Août 2026'
+    availability: 'Plus disponible jusqu\'à Août 2026',
+    description: "Le Range Rover Velar P400e représente le summum du luxe et de l'innovation en matière de SUV. Avec sa motorisation hybride rechargeable, il combine puissance, efficience et respect de l'environnement. Son design épuré et ses technologies de pointe en font un véhicule d'exception pour ceux qui recherchent l'excellence.",
+    specifications: {
+      acceleration: "0-100 km/h en 5.4s",
+      topSpeed: "209 km/h",
+      transmission: "Automatique 8 rapports",
+      seats: 5,
+      consumption: "2.2L/100km en cycle mixte"
+    },
+    features: [
+      "Système audio Meridian™ Surround",
+      "Toit panoramique coulissant",
+      "Sièges avant chauffants et ventilés",
+      "Affichage tête haute",
+      "Suspension pneumatique électronique",
+      "Système de caméras 360°",
+      "Apple CarPlay & Android Auto",
+      "Chargeur smartphone sans fil"
+    ],
+    included: [
+      "Assurance tous risques",
+      "Maintenance complète",
+      "Assistance 24/7",
+      "Véhicule de remplacement",
+      "Pneumatiques été/hiver"
+    ],
+    conditions: [
+      "Kilométrage annuel : 20 000 km",
+      "Durée minimale : 12 mois",
+      "Dépôt de garantie : 2 mois",
+      "Permis depuis 3 ans minimum"
+    ]
   },
   {
     id: 'porsche-macan-4s',

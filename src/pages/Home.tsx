@@ -2,7 +2,6 @@ import { Subscription } from '../components/blocks/Subscription';
 import { VehicleCategories } from '../components/blocks/VehicleCategories';
 import { DeliverySection } from '../components/blocks/DeliverySection';
 import { Services } from '../components/blocks/Services';
-import { Categories } from '../components/blocks/Categories';
 import { Hero } from '../components/blocks/Hero';
 
 export const Home = () => {
@@ -14,10 +13,9 @@ export const Home = () => {
     <main className="bg-black text-white">
       <Hero />
       <Subscription onPlanSelect={handlePlanSelect} />
-      <Categories />
+      <VehicleCategories />
       <DeliverySection />
       <Services />
-      <VehicleCategories />
     </main>
   );
 }; 

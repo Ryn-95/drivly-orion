@@ -68,13 +68,17 @@ export const Subscription = ({ onPlanSelect }: SubscriptionProps) => {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Voitures */}
             <div>
-              <div className="bg-white/5 rounded-lg p-6">
+              <div className="bg-white rounded-3xl p-4 shadow-lg" style={{ backgroundColor: '#ffffff' }}>
                 <img 
                   src={selectedPlan === 'plus' 
-                    ? "/images/vehicles/category-2.png"
-                    : "/images/vehicles/category-5.png"} 
+                    ? "/image/Orion_one.png"
+                    : "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500&auto=format&fit=crop&q=60"} 
                   alt="Véhicules" 
-                  className="w-full"
+                  className="w-full h-80 object-contain"
+                  style={{
+                    borderRadius: '3rem',
+                    clipPath: 'inset(0 round 3rem)'
+                  }}
                 />
               </div>
               <p className="mt-4 text-sm text-white/60">
